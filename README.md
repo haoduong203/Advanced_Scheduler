@@ -27,6 +27,6 @@ Dự án này tập trung vào việc mở rộng và sửa đổi bộ lập l�
     - Mỗi 4 tick: cập nhật lại priority cho tất cả thread
 
 ## Build và chạy 
-cd src/threads/build
-make clean
-make check
+- cd src/threads/build
+- make clean
+- make check
