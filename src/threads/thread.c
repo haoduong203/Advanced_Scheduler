@@ -597,6 +597,13 @@ void mlfqs_update_recent_cpu(struct thread *t) {
     int coef = DIV(MUL_MIX(load_avg, 2), ADD_MIX(MUL_MIX(load_avg, 2), 1));
     t->recent_cpu = ADD_MIX(MUL(coef, t->recent_cpu), t->nice);
 }
+void mlfqs_update_load_avg(void) {
+    int ready_threads = (thread_current() == idle_thread) ? 
+                        ready_thread_count : ready_thread_count + 1;
+    load_avg = add_fp(mul_fp(div_fp(int_to_fp(59), int_to_fp(60)), load_avg),
+                      mul_fp(div_fp(int_to_fp(1), int_to_fp(60)), int_to_fp(ready_threads)));
+}
+
 void print_thread_stats(void) {
     struct list_elem *e;
     printf("\n=== Thread CPU Stats ===\n");
